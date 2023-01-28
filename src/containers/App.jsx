@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import CardList from "./CardList"
-import SearchBox from './SearchBox'
-import Scroll from './Scroll'
+import CardList from "../components/CardList"
+import SearchBox from '../components/SearchBox'
+import Scroll from '../components/Scroll'
 // import { robots } from './Robots'
 import './App.css';
-import { robots } from './Robots';
+import { robots } from '../Robots';
 
 class App extends Component {
     constructor() {
@@ -35,12 +35,13 @@ class App extends Component {
     }
 
     render() {
-        const filteredRobots = this.state.robots.filter(robot => {
-            return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+        const { robots, searchfield } = this.state; // destructuring to avoid having to add 'this.state' when calling state
+        const filteredRobots = robots.filter(robot => {
+            return robot.name.toLowerCase().includes(searchfield.toLowerCase())
         })
         // console.log('render');
         // console.log(filteredRobots);
-        if (this.state.robots.length === 0) {
+        if (robots.length === 0) { // could also do if(!robots.length) as it would return false
             return <h1>Loading...</h1>
         } else {
             return (
